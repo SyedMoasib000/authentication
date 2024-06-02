@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         TextFormFieldWidget(
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                           validator: (value) => Utils.nameValidator(value),
                           label: "Full Name",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         TextFormFieldWidget(
@@ -89,13 +89,13 @@ class _SignUpState extends State<SignUp> {
                           validator: (value) => Utils.nameValidator(value),
                           label: "Email",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         PasswordTextField(
                           controller: _authController.password,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         CustomButton(
@@ -104,7 +104,7 @@ class _SignUpState extends State<SignUp> {
                           onpressed: () =>
                               _authController.registerUser(context),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(

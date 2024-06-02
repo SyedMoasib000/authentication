@@ -1,7 +1,6 @@
 import 'package:authentication/config/size_config.dart';
 import 'package:authentication/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({

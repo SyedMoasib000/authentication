@@ -15,9 +15,7 @@ class AuthController {
     try {
       await _authRepository.signUp(email.text.trim(), password.text.trim());
       Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => const SignIn()));
+          context, MaterialPageRoute(builder: (context) => const SignIn()));
     } catch (e) {
       // Handle registration failure (show error message, etc.)
     }
@@ -28,12 +26,10 @@ class AuthController {
       await _authRepository.signIn(email.text.trim(), password.text.trim());
       // Navigate to the next screen upon successful login
       Navigator.pushReplacement(
-        // ignore: duplicate_ignore
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
             builder: (context) =>
-                const WelcomeScreen()), // Replace NextScreen() with the actual screen you want to navigate to
+                WelcomeScreen()), // Replace NextScreen() with the actual screen you want to navigate to
       );
     } catch (e) {
       // Handle login failure (show error message, etc.)

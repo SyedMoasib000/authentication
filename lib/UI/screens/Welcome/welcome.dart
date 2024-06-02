@@ -3,15 +3,15 @@ import 'package:authentication/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-
+  WelcomeScreen({super.key});
+  final AuthController _authController = AuthController();
   @override
   Widget build(BuildContext context) {
-    final AuthController _authController = AuthController();
+    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Home Screen",
             style: TextStyle(color: whiteColor),
           ),
@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
               onPressed: () => {
                     _authController.logout(context),
                   },
-              icon: Icon(Icons.logout)),
+              icon: const Icon(Icons.logout)),
         ),
       ),
     );
