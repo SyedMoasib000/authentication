@@ -1,44 +1,54 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:life_link/repositories/auth_repository.dart';
+// ignore_for_file: use_build_context_synchronously
 
-// class AuthController {
-//   final AuthRepository _authRepository = AuthRepository();
+import 'package:authentication/UI/screens/Login/sign_in.dart';
+import 'package:authentication/UI/screens/Welcome/welcome.dart';
+import 'package:authentication/respositories/auth_repository.dart';
+import 'package:flutter/material.dart';
 
-//   Future<UserCredential?> signUp(
-//     String email,
-//     String password,
-//   ) async {
-//     return await _authRepository.signUp(
-//       email,
-//       password,
-//     );
-//   }
+class AuthController {
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final AuthRepository _authRepository = AuthRepository();
 
-//   Future<UserCredential?> signIn(
-//     String email,
-//     String password,
-//   ) async {
-//     return await _authRepository.signIn(
-//       email,
-//       password,
-//     );
-//   }
+  Future<void> registerUser(BuildContext context) async {
+    try {
+      await _authRepository.signUp(email.text.trim(), password.text.trim());
+      Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const SignIn()));
+    } catch (e) {
+      // Handle registration failure (show error message, etc.)
+    }
+  }
 
-//   void deleteUserAccountAndData() {
-//     _authRepository.deleteUserAccount();
-//   }
+  Future<void> loginUser(BuildContext context) async {
+    try {
+      await _authRepository.signIn(email.text.trim(), password.text.trim());
+      // Navigate to the next screen upon successful login
+      Navigator.pushReplacement(
+        // ignore: duplicate_ignore
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const WelcomeScreen()), // Replace NextScreen() with the actual screen you want to navigate to
+      );
+    } catch (e) {
+      // Handle login failure (show error message, etc.)
+    }
+  }
 
-//   void resetPassword(String email) async {
-//     try {
-//       _authRepository.resetPassword(email);
-//     } catch (e) {
-//       rethrow;
-//     }
-//   }
-
-//   Future<bool> checkIfUserExists(
-//     String email,
-//   ) async {
-//     return await _authRepository.checkIfUserExist(email);
-//   }
-// }
+  Future<void> logout(BuildContext context) async {
+    try {
+      await _authRepository.signOut();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const SignIn()), // Replace NextScreen() with the actual screen you want to navigate to
+      );
+    } catch (e) {}
+  }
+}

@@ -3,10 +3,10 @@ import 'package:authentication/UI/widgets/custom_button.dart';
 import 'package:authentication/UI/widgets/text_fields/password_text_field.dart';
 import 'package:authentication/UI/widgets/text_fields/text_form_field_widget.dart';
 import 'package:authentication/config/size_config.dart';
+import 'package:authentication/controllers/auth_controller.dart';
 import 'package:authentication/utils/colors.dart';
 import 'package:authentication/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -16,7 +16,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  TextEditingController user = TextEditingController();
+  final AuthController _authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,18 +72,18 @@ class _SignInState extends State<SignIn> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormFieldWidget(
-                          controller: user,
+                          controller: _authController.email,
                           validator: (value) => Utils.nameValidator(value),
                           label: "Your Email",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        PasswordTextField(controller: user),
+                        PasswordTextField(controller: _authController.password),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -97,12 +97,14 @@ class _SignInState extends State<SignIn> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        const CustomButton(
-                            txt: "Sign In", btnColor: primaryColor),
-                        SizedBox(
+                        CustomButton(
+                            txt: "Sign In",
+                            btnColor: primaryColor,
+                            onpressed: ()=>_authController.loginUser(context)),
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
